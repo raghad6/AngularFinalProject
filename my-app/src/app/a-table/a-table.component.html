@@ -1,0 +1,18 @@
+
+<div>
+    <table>
+
+      <tr>
+        <th> Name </th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Mobilee</th>
+        <th>Company</th>
+
+      </tr>
+
+  
+        <tr *ngFor=" let employee of employees" [employee]="employee" app-a-row></tr>
+ 
+    </table>
+  </div>

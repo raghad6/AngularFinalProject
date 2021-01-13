@@ -1,5 +1,5 @@
-    <td>{{employee.name}}</td>
-        <td>{{employee.age}}</td>
-        <td>{{employee.email}}</td>
-        <td>{{employee.mobile}}</td>
-        <td>{{employee.company}}</td>
+<h1> {{item}}</h1>
+
+<label>Add an item: <input [(ngModel)]="newItem"></label>
+
+<button type="button" class="btn btn-warning" (click)="addNewItem(newItem)">Add </button>

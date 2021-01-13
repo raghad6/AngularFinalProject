@@ -12,11 +12,14 @@ export class AppComponent {
   title = 'my-app';
   color : string;
   router: any;
-  
+  enter : any;
 
  ngOnint(){
  }
 
- 
+//  getValue(enter){
+//    console.log(enter , "enter");
+//    return enter;
+//  }
 
 }

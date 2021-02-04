@@ -1,0 +1,29 @@
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col">Status</th>
+      <th scope="col">Cr.Date</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + user.name" class="mr-2" style="width: 20px">
+        {{ user.name }}</td>
+      <td>{{ user.email}}</td>
+      <td>{{ user.role}}</td>
+      <td>{{ user.status}}</td>
+      <td>{{ user.crdate}}</td>
+      <td>{{ user.crdate }</td>
+    </tr>
+    </tbody>
+  </table>

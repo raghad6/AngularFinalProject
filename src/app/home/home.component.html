@@ -1,17 +1,22 @@
-<h1>Welcome</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<h1>Welcome ..</h1>
+<h2> You can Search fo a user or Add a new user!</h2>
+<br>
 
 <div class="form">
     <div class="left">
         <div class="border-area">
-            <h3>Add New User</h3>
+            <img src="../../assets/plus.png" (click)="Open()"  >
+            <h3> New User</h3>
         </div>
     </div>
 
     <div class="right">
         <div class="border-area">
-                <input id="autocomplete" list="users" class="form-control"  placeholder="Search" type="text" />
-            <datalist id="users"> </datalist>
+            <div class="search">
+                <input list="users" placeholder="Search" type="text" />
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
         </div>
     </div>
-
 </div>

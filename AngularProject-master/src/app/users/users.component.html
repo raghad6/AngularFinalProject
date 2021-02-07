@@ -1,0 +1,31 @@
+
+
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Status</th>
+        <th scope="col">Cr.Date</th>
+        <th scope="col"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email}}</td>
+        <td>{{ user.role}}</td>
+        <td>{{ user.status}}</td>
+        <td>{{ user.crdate}}</td>
+        <td><i class="fa fa-notes-medical"></i></td>
+      </tr>
+     
+    </tbody>
+  </table>
+  
+  <i class="far fa-user"></i>

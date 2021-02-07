@@ -1,2 +1,61 @@
-<p>add-user works!</p>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="card">
+        <div class="card-header">
+            Please Add your information
+        </div>
+        <div class="card-body">
+            <div class="form">
+                <div class="right">
+                    <label>
+                        Name: <br>
+                        <input type="text" formControlName="name" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required />
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required">Name is required</div>
+                        </div>
+                    </label>
+                    <label>
+                        Email: <br>
+                        <input type="text" formControlName="email" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required />
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                        </div>
+                    </label>
+                    <label>
+                        Role: <br>
+                        <input type="text" formControlName="role" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.role.errors }" required />
+                        <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                            <div *ngIf="f.role.errors.required">Role is required</div>
+                        </div>
+                    </label>
+                    <label>
+                        Status: <br>
+                        <input type="text" formControlName="status" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.status.errors }" required />
+                        <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                            <div *ngIf="f.status.errors.required">Status is required</div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="left">
+
+                    <div class="avatar-area"><img [src]="imageUrl"></div>
+                    <br>
+                    <label class="file">
+                        Chooce image: <br>
+                        <input type="file" formControlName="avatar" required (change)="selectFile($event)">
+                    </label>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-dark btn-lg">Submit</button>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 

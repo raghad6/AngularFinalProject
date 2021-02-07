@@ -1,0 +1,41 @@
+html {
+    padding: 0;
+    margin: 0;
+}
+.form {
+    height: 80vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    margin-top:-60px;
+}
+.right {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.left {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.avatar-area {
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+}
+
+img{
+    height: 100px;
+    width: 100px;
+}
+.card{
+    width: 600px;
+    height: 450px;
+    left: 35%;
+    margin-top: 70px;
+
+} 

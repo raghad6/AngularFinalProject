@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <table class="table">
     <thead class="thead-dark">
@@ -15,12 +16,15 @@
     <tbody>
       <tr *ngFor="let user of users; index as i">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{ user.name }}</td>
+        <td> <img src="../assets/img_avatar2.png" alt="Avatar" class="avatar">
+          {{ user.name }}</td>
         <td>{{ user.email}}</td>
         <td>{{ user.role}}</td>
         <td>{{ user.status}}</td>
         <td>{{ user.crdate}}</td>
-        <td><i class="fa fa-notes-medical"></i></td>
+        <td><button class="btn"><i class="fa fa-trash" ></i></button>
+          <button class="btn"><i class="fa fa-edit"></i></button>
+        </td>
       </tr>
 
     </tbody>

@@ -17,7 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-  
+import { EditUsersComponent } from './edit-users/edit-users.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RouterModule, Routes } from '@angular/router';
     HomeComponent,
     UsersComponent,
     AboutComponent,
-    AddUserComponent
+    AddUserComponent,
+    EditUsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,8 +38,9 @@ import { RouterModule, Routes } from '@angular/router';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    BrowserAnimationsModule, // required animations module
+    BrowserAnimationsModule, 
     NgxPaginationModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

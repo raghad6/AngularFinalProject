@@ -5,8 +5,9 @@ export interface User {
     name: string;
     email: string;
     role: string;
-    status: string
-    crdate: Number;
+    status: string;
+    crdate: Date;
+    img : any;
  }
 @Injectable({
   providedIn: 'root'
@@ -18,18 +19,24 @@ export class UsersService {
   usersRef!: AngularFireList<any>; // Reference to User data list, its an Observable
     // Reference to User data list, its an Observable
   userRef!: AngularFireObject<any>;   // Reference to User object, its an Observable too
-
+  // users: any[] = [
+  //   { name: 'raghad', email: 'rr@gmail.com', role: 'Manger', status: 'In', crdate: Date.now(), img:'../assets/avatar2.png' },
+  //   { name: 'f', email: 'raghad@gmail.com', role: 'Employee', status: 'In', crdate: Date.now(), img:'../assets/avatar2.png' },
+  //   { name: 'gh', email: 'rr@gmail.com', role: 'Employee', status: 'OFF', crdate: Date.now(), img:'../assets/avatar2.png' },
+  //   { name: 'gh', email: 'rddr@gmail.com', role: 'Employee', status: 'In', crdate: Date.now() , img:'../assets/avatar2.png'},
+  // ];
   
   constructor(private db: AngularFireDatabase) { }
 
     // Create User
   AddUser(user: User) {
-    this.db.list('/user').push({
+    this.usersRef.push({
       name: user.name,
       email: user.email,
       role: user.role,
       status: user.status,
       crdate: user.crdate,
+      img: user.img,
     })
   }
 
@@ -53,6 +60,7 @@ export class UsersService {
       role: user.role,
       status: user.status,
       crdate: user.crdate,
+      img: user.img,
     })
   }  
 

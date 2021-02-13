@@ -3,6 +3,9 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '../services/users.service';
+import { ToastrService } from 'ngx-toastr'; 
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -13,32 +16,35 @@ export class AddUserComponent implements OnInit {
   submitted = false;
   imageUrl:any;
 
+
   profileForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
     email: new FormControl('',[Validators.required]),
     avatar: new FormControl('',[Validators.required]),
     role: new FormControl('' ,[Validators.required]),
     status: new FormControl('' ,[Validators.required]),
+    crdate: new FormControl('' ,[Validators.required]),
   });
-
-
 
   constructor(private router : Router,
     public usersApi: UsersService,
-    public fb: FormBuilder) { }
+    public fb: FormBuilder,
+    private location: Location) { }
+    
 
   ngOnInit(): void {
-    this.usersApi.GetUsersList(); 
+    this.usersApi.GetUsersList();
+    this.profileForm; 
   }
 
-  // Reactive student form
-  studenForm() {
+  USerForm() {
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       avatar: new FormControl('',[Validators.required]),
       role: new FormControl('' ,[Validators.required]),
       status: new FormControl('' ,[Validators.required]),
+      crdate: new FormControl('' ,[Validators.required]),
         })  
   }
 
@@ -46,55 +52,32 @@ export class AddUserComponent implements OnInit {
    get name() {
     return this.profileForm.get('name');
   }
-
   get email() {
     return this.profileForm.get('email');
   }  
-
   get avatar() {
     return this.profileForm.get('avatar');
   }
-
   get role() {
     return this.profileForm.get('role');
   }
-
-  
   get status() {
     return this.profileForm.get('status');
   }
 
-  // Reset student form's values
-  ResetForm() {
-    this.profileForm.reset();
-  }  
- 
-  // submitUserData() {
-  //   this.usersApi.AddUser(this.profileForm.value); // Submit student data using CRUD API
-  //     // Reset form when clicked on reset button
-  //  };
 
 
   get f() { return this.profileForm.controls; }
 
   onSubmit() {
-
     console.warn(this.profileForm.value);
-
       this.submitted = true;
-
-      // stop here if form is invalid
       if (this.profileForm.invalid) {
-        this.usersApi.AddUser(this.profileForm.value); // Submit student data using CRUD API
-        this.ResetForm();
+        this.usersApi.AddUser(this.profileForm.value);
+        // this.toastr.success(this.profileForm.controls['name'].value + ' successfully added!'); 
       }
-
   }
 
-  // onReset() {
-  //     this.submitted = false;
-  //     this.profileForm.reset();
-  // }
 
   selectFile(event : any) {
 		if(!event.target.files[0] || event.target.files[0].length == 0) {
@@ -115,6 +98,9 @@ export class AddUserComponent implements OnInit {
 		}
   }
 
-
+ 
+  goBack() {
+    this.location.back();
+  }
 
 }

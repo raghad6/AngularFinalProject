@@ -1,9 +1,0 @@
-
-
-.body{
-    background-image: url('../assets/1.jpg'); 
-    filter: blur(5px);
-  -webkit-filter: blur(5px);
-  background-repeat: no-repeat;
-  
-}

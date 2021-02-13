@@ -1,55 +1,67 @@
 import { Component, OnInit } from '@angular/core';
+import { User, UsersService } from '../services/users.service';
+import { Router } from '@angular/router';
+
 interface user {
+  $key: string;
   name: string;
   email: string;
   role: string;
   status: string;
-  crdate:string;
+  crdate:Date;
+  img: ImageData;
 }
 
-const USERS: user[] = [
-  {
-    
-    name: 'Russia',
-    email: 'iiiiis',
-    role: '17075200',
-    status: '146989754',
-    crdate :'8888'
-  },
-  {
-    name: 'Canada',
-    email: 'jkhjh',
-    role: '9976140',
-    status: '36624199',
-    crdate :'0990'
-  },
-  {
-    name: 'United States',
-    email: 'jkhkk.',
-    role: '9629091',
-    status: '324459463',
-    crdate :'09'
-  },
-  {
-    name: 'China',
-    email: 'iijjjj',
-    role: '9596960',
-    status: '1409517397',
-    crdate :'9798'
-  }
-];
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  users = USERS;
+  p: number = 1;                 
+  user: User[] = [];                 
+  hideWhenNoUser: boolean = false; 
+  noData: boolean = false;          
 
-  constructor() { }
+  term: string = '';
+  // user: any[] = this.userApi.users;
 
-  ngOnInit(): void {
+  constructor(private userApi: UsersService,
+    private router : Router) { }
+
+    ngOnInit() {
+      this.dataState(); 
+      let s = this.userApi.GetUsersList(); 
+      s.snapshotChanges().subscribe(data => { 
+        this.user = [];
+        data.forEach(item => {
+          let a = item.payload.toJSON(); 
+          // a['$Key'] = item.key;
+          this.user.push(a as User);
+        })
+      })
+    }
+
+  dataState() {     
+    this.userApi.GetUsersList().valueChanges().subscribe(data => {
+      
+      if(data.length <= 0){
+        this.hideWhenNoUser = false;
+        this.noData = true;
+      } else {
+        this.hideWhenNoUser= true;
+        this.noData = false;
+      }
+    })
   }
 
-  
+   deleteUser(user:any) {
+    if (window.confirm('Are sure you want to delete this User ?')) { 
+      this.userApi.DeleteUser(user.$key) 
+    }
+  }
+
+  Open() {
+    this.router.navigate(['/edit']);
+}
 }

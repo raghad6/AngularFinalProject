@@ -1,31 +1,56 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Role</th>
-        <th scope="col">Status</th>
-        <th scope="col">Cr.Date</th>
-        <th scope="col"></th>
 
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users; index as i">
-        <th scope="row">{{ i + 1 }}</th>
-        <td> <img src="../assets/img_avatar2.png" alt="Avatar" class="avatar">
-          {{ user.name }}</td>
-        <td>{{ user.email}}</td>
-        <td>{{ user.role}}</td>
-        <td>{{ user.status}}</td>
-        <td>{{ user.crdate}}</td>
-        <td><button class="btn"><i class="fa fa-trash" ></i></button>
-          <button class="btn"><i class="fa fa-edit"></i></button>
-        </td>
-      </tr>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Users List</h1>
+  <!-- It won't show if there is no user data -->
+  <a routerLink="/adduser" class="btn btn-outline-primary" *ngIf="hideWhenNoUser">
+    <i class="fa fa-plus custom-fa-plus"></i>
+    Add User
+  </a>
+</div>
 
-    </tbody>
-  </table>
+<div class="pricing-header mx-auto">
+
+  <!-- No data shows when their is no user data available -->
+  <div class="no-data text-center" *ngIf="noData">
+
+    <p class="nodata-msg">No Users added yet!</p>
+    <a routerLink="/adduser" class="btn btn-success">
+      <i class="fa fa-plus custom-fa-plus"></i>
+      Add User
+    </a>
+  </div>
+
+  <!-- Showing students data -->
+  <div class="table-responsive" *ngIf="hideWhenNoUser">
+    <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+          <th scope="col">Status</th>
+          <th scope="col">Cr.Date</th>
+          <th scope="col">Edit or Delete Users </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let user of user  let i = index;">
+          <th scope="row">{{ i + 1 }}</th>
+          <td><img class="avatar" src="{{user.img}}"> {{user.name}} </td>
+          <td>{{user.email}}</td>
+          <td>{{user.role}}</td>
+          <td>{{user.status}}</td>
+          <td>{{user.crdate  | date: 'medium'}}</td>
+          <td >
+            <button class="btn btn-outline-info"><i class="fa fa-trash"  (click)="deleteUser(user)"></i></button>
+            <button class="btn btn-outline-info"><i class="fa fa-edit" routerLink="/edit/{{user.$key}}"></i></button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -57,7 +57,6 @@ export class UsersService {
   // Update User Object
   UpdateUser(user: User) {
     this.userRef.update({
-      $key: user.$key,
       name: user.name,
       email: user.email,
       avatar: user.avatar,

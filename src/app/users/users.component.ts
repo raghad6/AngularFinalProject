@@ -3,6 +3,7 @@ import { User, UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
 
 interface user {
+  $key: string;
   name: string;
   email: string;
   role: string;
@@ -25,7 +26,9 @@ export class UsersComponent implements OnInit {
 
 
   constructor(private userApi: UsersService,
-    private router : Router) { }
+    private router : Router) {
+      this.user = [];
+     }
 
     ngOnInit() {
       this.dataState(); 
@@ -35,11 +38,14 @@ export class UsersComponent implements OnInit {
         data.forEach(item => {
           let a = item.payload.toJSON(); 
           a = item.key;
+          // a['$key'] = item.key;    \\this line should fetch metadata from firebase but there's an error accured don't know why , it was working !!:()
           this.user.push(a as User);
         })
       })
+      // return  this.userApi.GetUsersList();
+
     }
-    
+  
  
   dataState() {     
     this.userApi.GetUsersList().valueChanges().subscribe(data => {
@@ -47,9 +53,7 @@ export class UsersComponent implements OnInit {
       if(data.length <= 0){
         this.hideWhenNoUser = false;
         this.noData = true;
-
       } else {
-
         this.hideWhenNoUser= true;
         this.noData = false;
       }

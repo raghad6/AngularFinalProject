@@ -9,30 +9,26 @@ import { Location } from '@angular/common';
   styleUrls: ['./edit-users.component.css']
 })
 export class EditUsersComponent implements OnInit {
-  imageUrl: any;
+  imageUrl:any;
 
   editForm = new FormGroup({
 
   });
 
-  constructor(private usersApi: UsersService,
-    private fb: FormBuilder,
-    private location: Location,
-    private actRoute: ActivatedRoute,
-    private router: Router,) { }
+  constructor(private usersApi: UsersService,      
+    private fb: FormBuilder,          
+    private location: Location,      
+    private actRoute: ActivatedRoute, 
+    private router: Router,   ) { }
 
-  ngOnInit() {
-    this.updateUserData();
-    const id = this.actRoute.snapshot.paramMap.get('id');
-    this.usersApi.GetUser('id').valueChanges().subscribe(data => {
-      this.editForm.setValue(data)
-    })
-  }
+    ngOnInit() {
+      this.updateUserData();    
+      const id = this.actRoute.snapshot.paramMap.get('id');  
+      this.usersApi.GetUser('id').valueChanges().subscribe(data => {
+        this.editForm.setValue(data)  
+      })
+    }
 
-
-  get $key() {
-    return this.editForm.get(' $key');
-  }
   get name() {
     return this.editForm.get('name');
   }
@@ -47,48 +43,48 @@ export class EditUsersComponent implements OnInit {
   }
   get status() {
     return this.editForm.get('status');
-  }
+  }  
   get crdate() {
     return this.editForm.get('crdate');
-  }
+  } 
 
   updateUserData() {
     this.editForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
-      avatar: ['', [Validators.required]],
-      role: ['', [Validators.required]],
-      status: ['', [Validators.required]],
-      crdate: ['', [Validators.required]],
-    })
+      avatar: ['',[Validators.required]],
+      role:['',[Validators.required]],
+      status: ['',[Validators.required]],
+      crdate: ['',[Validators.required]],
+        }) 
   }
 
   goBack() {
     this.location.back();
   }
 
-  updateForm() {
-    this.usersApi.UpdateUser(this.editForm.value);
-    this.router.navigate(['users']);
-  }
+  updateForm(){
+    this.usersApi.UpdateUser(this.editForm.value);       
+    this.router.navigate(['users']); 
+  }  
+  
+  selectFile(event : any) {
+		if(!event.target.files[0] || event.target.files[0].length == 0) {
+			return;
+		}
 
-  selectFile(event: any) {
-    if (!event.target.files[0] || event.target.files[0].length == 0) {
-      return;
-    }
+		var mimeType = event.target.files[0].type;
 
-    var mimeType = event.target.files[0].type;
+		if (mimeType.match(/image\/*/) == null) {
+			return;
+		}
 
-    if (mimeType.match(/image\/*/) == null) {
-      return;
-    }
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
 
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-
-    reader.onload = (_event) => {
-      this.imageUrl = reader.result;
-    }
+		reader.onload = (_event) => {
+			this.imageUrl = reader.result; 
+		}
   }
 
 }

@@ -22,7 +22,7 @@
     </a>
   </div>
 
-  <!-- Showing students data -->
+  <!-- Showing Users data -->
   <div class="table-responsive" *ngIf="hideWhenNoUser">
     <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
       <thead class="thead-dark">
@@ -40,7 +40,7 @@
       <tbody>
         <tr *ngFor="let user of user  let i = index;">
           <th scope="row">{{ i + 1 }}</th>
-          <td><img class="avatar" src="{{user.img}}"> {{user.name}} </td>
+          <td><img class="avatar" src="{{user.avatar}}"> {{user.name}} </td>
           <td>{{user.email}}</td>
           <td>{{user.role}}</td>
           <td>{{user.status}}</td>

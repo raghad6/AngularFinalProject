@@ -48,18 +48,15 @@
                     <br>
                     <label class="file">
                         Chooce image: <br>
-                        <input type="file" formControlName="avatar" required (change)="selectFile($event)">
+                        <input type="file" id="file" formControlName="avatar" required 
+                        (change)="selectFile($event)" name="image"autocomplete="off">
                     </label>
-
-                    <!-- <label>Start date:<br>
+                    <label>Start date:<br>
                         <input type="date" id="start" name="crdate" min="2018-01-01"
                           max="2022-12-31"  [ngClass]="{ 'is-invalid': submitted && f.crdate.errors }" required >
-                          <div *ngIf="submitted && f.crdate.errors" class="invalid-feedback">
-                              <div *ngIf="f.crdate.errors.required">Start Date is required</div>
-                          </div>  
-                      </label> -->
+                      </label>
                       <br>
-                    <button type="submit" class="btn btn-dark btn-lg">Submit</button>
+                    <button type="submit" class="btn btn-dark btn-lg" routerLink="/users" (click)= "onSubmit()">Submit</button>
                 </div>
             </div>
         </div>

@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';  // Firebase modules for Database, Data list and Single object
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';  
 export interface User {
     $key: string;
     name: string;
     email: string;
+    avatar : ImageData;
     role: string;
     status: string;
     crdate: Date;
-    img : any;
  }
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+  [x: string]: any;
 
 
 
-  usersRef!: AngularFireList<any>; // Reference to User data list, its an Observable
-    // Reference to User data list, its an Observable
-  userRef!: AngularFireObject<any>;   // Reference to User object, its an Observable too
+  usersRef!: AngularFireList<any>; 
+  userRef!: AngularFireObject<any>;   
+  
   // users: any[] = [
   //   { name: 'raghad', email: 'rr@gmail.com', role: 'Manger', status: 'In', crdate: Date.now(), img:'../assets/avatar2.png' },
   //   { name: 'f', email: 'raghad@gmail.com', role: 'Employee', status: 'In', crdate: Date.now(), img:'../assets/avatar2.png' },
@@ -30,13 +31,14 @@ export class UsersService {
 
     // Create User
   AddUser(user: User) {
-    this.usersRef.push({
+    this.db.list('/user').push({
+      $key: user.$key,
       name: user.name,
       email: user.email,
+      avatar: user.avatar,
       role: user.role,
       status: user.status,
       crdate: user.crdate,
-      img: user.img,
     })
   }
 
@@ -55,12 +57,13 @@ export class UsersService {
   // Update User Object
   UpdateUser(user: User) {
     this.userRef.update({
+      $key: user.$key,
       name: user.name,
       email: user.email,
+      avatar: user.avatar,
       role: user.role,
       status: user.status,
       crdate: user.crdate,
-      img: user.img,
     })
   }  
 

@@ -3,7 +3,6 @@ import { User, UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
 
 interface user {
-  $key: string;
   name: string;
   email: string;
   role: string;
@@ -22,9 +21,8 @@ export class UsersComponent implements OnInit {
   user: User[] = [];                 
   hideWhenNoUser: boolean = false; 
   noData: boolean = false;          
-
   term: string = '';
-  // user: any[] = this.userApi.users;
+
 
   constructor(private userApi: UsersService,
     private router : Router) { }
@@ -36,19 +34,22 @@ export class UsersComponent implements OnInit {
         this.user = [];
         data.forEach(item => {
           let a = item.payload.toJSON(); 
-          // a['$Key'] = item.key;
+          a = item.key;
           this.user.push(a as User);
         })
       })
     }
-
+    
+ 
   dataState() {     
     this.userApi.GetUsersList().valueChanges().subscribe(data => {
       
       if(data.length <= 0){
         this.hideWhenNoUser = false;
         this.noData = true;
+
       } else {
+
         this.hideWhenNoUser= true;
         this.noData = false;
       }

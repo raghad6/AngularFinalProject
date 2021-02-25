@@ -36,13 +36,11 @@ export class UsersComponent implements OnInit {
       s.snapshotChanges().subscribe(data => { 
         this.user = [];
         data.forEach(item => {
-          let a = item.payload.toJSON(); 
-          a = item.key;
-          // a['$key'] = item.key;    \\this line should fetch metadata from firebase but there's an error accured don't know why , it was working !!:()
+          let a:any= item.payload.toJSON(); 
+          a['$key'] = item.key;   
           this.user.push(a as User);
         })
       })
-      // return  this.userApi.GetUsersList();
 
     }
   
